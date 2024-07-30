@@ -1,4 +1,4 @@
 ﻿  Science Calculator.cpp
-C:\Users\machm\Documents\Nauka\Science Calculator\Science Calculator\Science Calculator.cpp(132,20): warning C4244: "inicjowanie": konwersja z "long double" do "int", możliwa utrata danych
-C:\Users\machm\Documents\Nauka\Science Calculator\Science Calculator\Science Calculator.cpp(133,23): warning C4244: "*=": konwersja z "long double" do "int", możliwa utrata danych
+C:\Users\machm\Documents\Nauka\Science Calculator\Science Calculator\Science Calculator.cpp(133,20): warning C4244: "inicjowanie": konwersja z "long double" do "int", możliwa utrata danych
+C:\Users\machm\Documents\Nauka\Science Calculator\Science Calculator\Science Calculator.cpp(134,23): warning C4244: "*=": konwersja z "long double" do "int", możliwa utrata danych
   Science Calculator.vcxproj -> C:\Users\machm\Documents\Nauka\Science Calculator\x64\Debug\Science Calculator.exe

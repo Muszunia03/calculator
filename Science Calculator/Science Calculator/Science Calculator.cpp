@@ -2,10 +2,12 @@
 #include <vector>
 #include <algorithm>
 #include <complex>
+#include <sstream>
 using namespace std;
 
 class Function {
 public:
+    // Operations for real numbers
     long double add(long double number1, long double number2) {
         long double result = number1 + number2;
         cout << number1 << " + " << number2 << " = " << result << endl;
@@ -125,9 +127,8 @@ public:
         cout << "Median of the provided numbers = " << result << endl;
         return result;
     }
-    
-    long double factorial(long double x) {
 
+    long double factorial(long double x) {
         int result = 1;
         for (int i = x; i > 0; i--) {
             result *= x;
@@ -162,6 +163,7 @@ public:
         return result;
     }
 
+    // Operations for complex numbers
     complex<long double> add_complex(complex<long double> number1, complex<long double> number2) {
         complex<long double> result = number1 + number2;
         cout << "(" << number1.real() << " + " << number1.imag() << "i) + ("
@@ -178,6 +180,27 @@ public:
         return result;
     }
 
+    complex<long double> multiply_complex(complex<long double> number1, complex<long double> number2) {
+        complex<long double> result = number1 * number2;
+        cout << "(" << number1.real() << " + " << number1.imag() << "i) * ("
+            << number2.real() << " + " << number2.imag() << "i) = "
+            << result.real() << " + " << result.imag() << "i" << endl;
+        return result;
+    }
+
+    complex<long double> divide_complex(complex<long double> number1, complex<long double> number2) {
+        if (number2 == complex<long double>(0, 0)) {
+            cout << "Division by zero is not allowed." << endl;
+            return complex<long double>(0, 0);
+        }
+        complex<long double> result = number1 / number2;
+        cout << "(" << number1.real() << " + " << number1.imag() << "i) / ("
+            << number2.real() << " + " << number2.imag() << "i) = "
+            << result.real() << " + " << result.imag() << "i" << endl;
+        return result;
+    }
+
+    // Function to parse a complex number input string
     complex<long double> parse_complex(const string& input) {
         long double real = 0, imag = 0;
         char sign, i;
@@ -186,16 +209,16 @@ public:
         if (sign == '-') imag = -imag;
         return complex<long double>(real, imag);
     }
-    
 };
 
 int main() {
     Function Calc;
 
     cout << "Which operation do you want to perform? " << endl;
-    cout << "1. Add\n2. Subtract\n3. Multiply\n4. Divide\n5. Power\n6. Sqrt\n7. Log\n8. Absolute value\n9. Mean\n10. Median \n11. Factorial\n12. Exponential\n13. Logarithm10\n14. Add (Complex)\n15. Subtract (Complex)" << endl;
+    cout << "1. Add (Real)\n2. Subtract (Real)\n3. Multiply (Real)\n4. Divide (Real)\n5. Power\n6. Sqrt\n7. Log\n8. Absolute value\n9. Mean\n10. Median\n11. Factorial\n12. Exponential\n13. Logarithm10\n14. Add (Complex)\n15. Subtract (Complex)\n16. Multiply (Complex)\n17. Divide (Complex)" << endl;
     int response;
     cin >> response;
+    cin.ignore(); // Clear the newline character from the buffer
 
     switch (response) {
     case 1: {
@@ -284,8 +307,8 @@ int main() {
         while (cin >> number) {
             numbers.push_back(number);
         }
-        cin.clear(); 
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         Calc.median(numbers);
         break;
     }
@@ -307,7 +330,7 @@ int main() {
         long double log10_number;
         cout << "Enter the number to find the log10 value: ";
         cin >> log10_number;
-        Calc.exponential(log10_number);
+        Calc.log10(log10_number);
         break;
     }
     case 14: {
@@ -330,6 +353,28 @@ int main() {
         complex<long double> number1 = Calc.parse_complex(input1);
         complex<long double> number2 = Calc.parse_complex(input2);
         Calc.subtract_complex(number1, number2);
+        break;
+    }
+    case 16: {
+        string input1, input2;
+        cout << "Enter the first complex number (a+bi): ";
+        getline(cin, input1);
+        cout << "Enter the second complex number (a+bi): ";
+        getline(cin, input2);
+        complex<long double> number1 = Calc.parse_complex(input1);
+        complex<long double> number2 = Calc.parse_complex(input2);
+        Calc.multiply_complex(number1, number2);
+        break;
+    }
+    case 17: {
+        string input1, input2;
+        cout << "Enter the first complex number (a+bi): ";
+        getline(cin, input1);
+        cout << "Enter the second complex number (a+bi): ";
+        getline(cin, input2);
+        complex<long double> number1 = Calc.parse_complex(input1);
+        complex<long double> number2 = Calc.parse_complex(input2);
+        Calc.divide_complex(number1, number2);
         break;
     }
     default:
